@@ -58,8 +58,13 @@ void printCalendar(int year)
 
         if (year < current_year || (year == current_year && i + 1 <= current_month))
         {
+            cout << "\033[35m"
+                 << "  Sun"
+                 << "\033[0m";
             cout << "\033[1;33m"
-                 << "  Sun  Mon  Tue  Wed  Thu  Fri  Sat"
+                 << "  Mon  Tue  Wed  Thu  Frid";
+            cout << "\033[35m"
+                 << "  Sat"
                  << "\033[0m" << endl;
         }
         else
