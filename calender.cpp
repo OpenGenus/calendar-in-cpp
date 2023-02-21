@@ -32,7 +32,7 @@ void printCalendar(int year)
 
     for (int i = 0; i < 12; i++)
     {
-        if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))
+        if ((year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) && i == 1)
             days = 29;
         else
             days = monthDays[i];
@@ -112,7 +112,7 @@ int main()
         cout << "Enter a year or type anything else to quit: ";
         cin >> year;
         cout << "------------------------------------------------" << endl;
-        if (std::cin.fail())
+        if (cin.fail())
             break;
         printCalendar(year);
     }
