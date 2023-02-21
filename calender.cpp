@@ -17,9 +17,6 @@ void printCalendar(int year)
     int current_year = 1900 + local_time->tm_year;
     int current_month = local_time->tm_mon + 1;
     int current_day = local_time->tm_mday;
-    cout << current_year << endl;
-    cout << current_month << endl;
-    cout << current_day << endl;
 
     cout << " -----------------------------------" << endl;
     cout << "           Calendar - " << year << endl;
