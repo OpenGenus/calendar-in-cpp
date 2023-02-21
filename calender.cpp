@@ -19,7 +19,9 @@ void printCalendar(int year)
     int current_day = local_time->tm_mday;
 
     cout << " -----------------------------------" << endl;
-    cout << "           Calendar - " << year << endl;
+    cout << "\033[1;33m"
+         << "           Calendar - " << year
+         << "\033[0m" << endl;
     cout << " -----------------------------------" << endl;
 
     int days;
@@ -30,13 +32,8 @@ void printCalendar(int year)
 
     for (int i = 0; i < 12; i++)
     {
-        if (i == 1)
-        {
-            if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))
-                days = 29;
-            else
-                days = monthDays[i];
-        }
+        if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))
+            days = 29;
         else
             days = monthDays[i];
 
@@ -59,7 +56,16 @@ void printCalendar(int year)
                  << endl;
         }
 
-        cout << "  Sun  Mon  Tue  Wed  Thu  Fri  Sat" << endl;
+        if (year < current_year || (year == current_year && i + 1 <= current_month))
+        {
+            cout << "\033[1;33m"
+                 << "  Sun  Mon  Tue  Wed  Thu  Fri  Sat"
+                 << "\033[0m" << endl;
+        }
+        else
+        {
+            cout << "  Sun  Mon  Tue  Wed  Thu  Fri  Sat" << endl;
+        }
         int k;
         for (k = 0; k < startingGap; k++)
             cout << "     ";
@@ -94,28 +100,17 @@ void printCalendar(int year)
 
 int main()
 {
-    char option;
-    do
+    int year;
+    while (1)
     {
-        cout << "Calendar Menu" << endl;
-        cout << "1. Enter y/Y to see calendar" << endl;
-        cout << "2. Enter n/N to quit" << endl
-             << endl;
-        cout << "Enter your option" << endl;
-        cin >> option;
-
-        switch (option)
-        {
-        case 'Y':
-        case 'y':
-            int year;
-            cout << "Enter the calendar year: ";
-            cin >> year;
-            cout << endl;
-            printCalendar(year);
+        cout << "------------------------------------------------" << endl;
+        cout << "Enter a year or type anything else to quit: ";
+        cin >> year;
+        cout << "------------------------------------------------" << endl;
+        if (std::cin.fail())
             break;
-        }
-    } while (option != 'N' && option != 'n');
+        printCalendar(year);
+    }
 
     return 0;
 }
